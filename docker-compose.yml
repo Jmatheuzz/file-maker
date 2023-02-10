@@ -1,0 +1,21 @@
+version: "3.2"
+
+services:
+  rabbitmq:
+    container_name: rbmq-worker-file-maker
+    hostname: rbmq
+    image: rabbitmq:3-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=dev
+      - RABBITMQ_DEFAULT_PASS=senhadev
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+            - '~/.docker-conf/rabbitmq-rabbitmq-file-maker/data/:/var/lib/rabbitmq/mnesia/'
+    networks:
+      - rabbitmq_go_net
+
+networks:
+  rabbitmq_go_net:
+    driver: bridge
